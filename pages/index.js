@@ -1,88 +1,75 @@
-import React from 'react'
-import Head from 'next/head'
-import Nav from '../components/nav'
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
-const Home = () => (
-  <div>
-    <Head>
-      <title>Home</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+import Head from 'next/head';
 
-    <Nav />
+import LoginForm from '../components/LoginForm';
+const Home = () => {
+  const router = useRouter();
 
-    <div className="hero">
-      <h1 className="title">Welcome to Next.js!</h1>
-      <p className="description">
-        To get started, edit <code>pages/index.js</code> and save to reload.
-      </p>
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleChangeEmail = ({ target: { value } }) => {
+    setEmail(value);
+  };
+  const handleChangePassword = ({ target: { value } }) => {
+    setPassword(value);
+  };
 
-      <div className="row">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Learn more about Next.js in the documentation.</p>
-        </a>
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Next.js Learn &rarr;</h3>
-          <p>Learn about Next.js by following an interactive tutorial!</p>
-        </a>
-        <a
-          href="https://github.com/zeit/next.js/tree/master/examples"
-          className="card"
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Find other example boilerplates on the Next.js GitHub.</p>
-        </a>
+  const handleLogin = () => {
+    router.push('/profile');
+  };
+  return (
+    <div>
+      <Head>
+        <title>Login</title>
+        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="stylesheet"
+          href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+        />
+
+        <link
+          rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css"
+        />
+
+        <link
+          rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css"
+        />
+      </Head>
+      <div className="layout">
+        <div>
+          <h1>Login</h1>
+        </div>
+        <LoginForm
+          onEmailChange={handleChangeEmail}
+          email={email}
+          password={password}
+          onPasswordChange={handleChangePassword}
+          onLogin={handleLogin}
+        />
       </div>
+      <style jsx>{`
+        .layout {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+        .form-container {
+          width: 22rem;
+          display: flex;
+          flex-direction: column;
+        }
+        .width-100 {
+          width: 100%;
+        }
+      `}</style>
     </div>
+  );
+};
 
-    <style jsx>{`
-      .hero {
-        width: 100%;
-        color: #333;
-      }
-      .title {
-        margin: 0;
-        width: 100%;
-        padding-top: 80px;
-        line-height: 1.15;
-        font-size: 48px;
-      }
-      .title,
-      .description {
-        text-align: center;
-      }
-      .row {
-        max-width: 880px;
-        margin: 80px auto 40px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
-      .card {
-        padding: 18px 18px 24px;
-        width: 220px;
-        text-align: left;
-        text-decoration: none;
-        color: #434343;
-        border: 1px solid #9b9b9b;
-      }
-      .card:hover {
-        border-color: #067df7;
-      }
-      .card h3 {
-        margin: 0;
-        color: #067df7;
-        font-size: 18px;
-      }
-      .card p {
-        margin: 0;
-        padding: 12px 0 0;
-        font-size: 13px;
-        color: #333;
-      }
-    `}</style>
-  </div>
-)
-
-export default Home
+export default Home;
