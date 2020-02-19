@@ -7,6 +7,6 @@
   "author": "Katerina <ekaterinabez@gmail.com>",
   "license": "MIT",
   "workspaces": [
-    "client/*"
+    "packages/*"
   ]
 }
