@@ -9,7 +9,7 @@ node_modules
 /client/coverage
 
 # next.js
-/client/.next/
+.next
 out
 
 # production
