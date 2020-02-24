@@ -1,23 +1,14 @@
-import Router from 'next/router';
-import { useContext, useEffect } from 'react';
-import netlifyIdentity from 'netlify-identity-widget';
+import { useContext } from 'react';
 import Head from 'next/head';
 import { IdentityContext } from './IdentityContext';
+import ProfilePage from '../../components/Profile';
 
-const Home = () => {
+const Account = () => {
   const { user } = useContext(IdentityContext);
-  useEffect(() => {
-    netlifyIdentity.init({});
-    if (user) {
-      Router.push('/profile');
-    } else {
-      Router.push('/login');
-    }
-  });
   return (
     <div>
       <Head>
-        <title>App</title>
+        <title>Profile</title>
         <link rel="icon" href="/favicon.ico" />
         <link
           rel="stylesheet"
@@ -34,8 +25,11 @@ const Home = () => {
           href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css"
         />
       </Head>
+      <div>
+        <ProfilePage user={user} />
+      </div>
     </div>
   );
 };
 
-export default Home;
+export default Account;
