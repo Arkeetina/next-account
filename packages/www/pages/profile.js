@@ -1,10 +1,19 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Head from 'next/head';
+import Router from 'next/router';
+import netlifyIdentity from 'netlify-identity-widget';
+
 import { IdentityContext } from './IdentityContext';
-import ProfilePage from '../../components/Profile';
+import ProfilePage from '../components/Profile';
 
 const Account = () => {
   const { user } = useContext(IdentityContext);
+  useEffect(() => {
+    netlifyIdentity.init({});
+    if (!user) {
+      Router.push('/login');
+    }
+  });
   return (
     <div>
       <Head>
